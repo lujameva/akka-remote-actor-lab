@@ -1,0 +1,29 @@
+apply plugin: 'idea'
+apply plugin: 'scala'
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.11.8'
+}
+
+dependencies {
+    compile 'com.typesafe.akka:akka-actor_2.11:2.4.8'
+    compile 'com.typesafe.akka:akka-remote_2.11:2.4.8'
+    testCompile 'com.typesafe.akka:akka-testkit_2.11:2.4.8'
+    testCompile 'org.scalatest:scalatest_2.11:2.2.6'
+}
+
+repositories {
+    mavenCentral()
+}
+
+task runGreeter(type: JavaExec, dependsOn: classes) {
+    println('Starting greeter')
+    main = 'GreeterMain'
+    classpath sourceSets.main.runtimeClasspath
+}
+
+task runReceiver(type: JavaExec, dependsOn: classes) {
+    println('Starting receiver')
+    main = 'ReceiverMain'
+    classpath sourceSets.main.runtimeClasspath
+}
